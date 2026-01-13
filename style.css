@@ -16,7 +16,7 @@
 *{ box-sizing:border-box; }
 body{
   margin:0;
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
+ font-family: "MyComic", "Comic Sans MS", "Comic Sans", cursive;
   background:var(--bg);
   color:var(--ink);
 }
