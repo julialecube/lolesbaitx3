@@ -13,6 +13,7 @@ const gateMsg = document.getElementById("gateMsg");
 const baitZone = document.getElementById("baitZone");
 const baitWall = document.getElementById("baitWall");
 const pixelGrid = document.getElementById("pixelGrid");
+const finalRow = document.getElementById("finalRow");
 
 const viewer = document.getElementById("viewer");
 const bigImg = document.getElementById("bigImg");
@@ -68,12 +69,15 @@ gateBtn.addEventListener("click", () => {
   }
 
   if (step === gateSteps.length) {
-    baitZone.hidden = false;
-    buildBaitWall();
-    buildPixelGallery();
-    baitZone.scrollIntoView({behavior:"smooth", block:"start"});
-    showRandomImage();
-  }
+  baitZone.hidden = false;
+  if (finalRow) finalRow.hidden = false;
+
+  buildBaitWall();
+  buildPixelGallery();
+  baitZone.scrollIntoView({behavior:"smooth", block:"start"});
+  showRandomImage();
+}
+
 });
 
 // BAIT wall
