@@ -9,6 +9,8 @@ const startGateBtn = document.getElementById("startGateBtn");
 const gate = document.getElementById("gate");
 const gateBtn = document.getElementById("gateBtn");
 const gateMsg = document.getElementById("gateMsg");
+const scrollBait = document.getElementById("scrollBait");
+const voidBox = document.getElementById("voidBox");
 
 const baitZone = document.getElementById("baitZone");
 const baitWall = document.getElementById("baitWall");
@@ -46,8 +48,9 @@ function setStatus(msg){ statusEl.textContent = msg; }
 
 // Entrar -> mostra gate
 startGateBtn.addEventListener("click", () => {
-  gate.hidden = false;
-  gate.scrollIntoView({behavior:"smooth", block:"start"});
+  if (scrollBait) scrollBait.hidden = true;   // desapareix el bloc del scroll
+  gate.hidden = false;                        // apareix el passadís
+  // IMPORTANT: NO fem scrollIntoView -> et quedes al principi
 });
 
 // Steps gate (últim botó = "venga va")
@@ -74,7 +77,6 @@ gateBtn.addEventListener("click", () => {
 
   buildBaitWall();
   buildPixelGallery();
-  baitZone.scrollIntoView({behavior:"smooth", block:"start"});
   showRandomImage();
 }
 
@@ -125,7 +127,6 @@ function openImage(it){
   progressNote.textContent = "—";
 
   setTimeout(() => setStatus("ok ara sí (parcial)"), 600);
-  viewer.scrollIntoView({behavior:"smooth", block:"start"});
 }
 
 // Random different
@@ -221,9 +222,9 @@ window.addEventListener("scroll", () => {
   }
 
   const nearBottom = window.innerHeight + y >= document.body.offsetHeight - 60;
-  if (nearBottom) {
-    const spacer = document.createElement("div");
-    spacer.style.height = "55vh";
-    document.body.appendChild(spacer);
-  }
+if (nearBottom && scrollBait && !scrollBait.hidden && voidBox) {
+  const spacer = document.createElement("div");
+  spacer.style.height = "55vh";
+  voidBox.appendChild(spacer);
+}
 });
